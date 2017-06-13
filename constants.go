@@ -2659,3 +2659,15 @@ const (
 	MOUSEEVENTF_XDOWN           = 0x0080
 	MOUSEEVENTF_XUP             = 0x0100
 )
+
+// ExitWindowsEx Flags https://msdn.microsoft.com/en-us/library/windows/desktop/aa376868(v=vs.85).aspx
+const (
+	EWX_LOGOFF          = 0
+	EWX_SHUTDOWN        = 0x00000001
+	EWX_REBOOT          = 0x00000002
+	EWX_FORCE           = 0x00000004
+	EWX_POWEROFF        = 0x00000008
+	EWX_FORCEIFHUNG     = 0x00000010
+	EWX_RESTARTAPPS     = 0x00000040
+	EWX_HYBRID_SHUTDOWN = 0x00400000
+)
