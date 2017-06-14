@@ -29,6 +29,7 @@ var (
 	procOpenService        = modadvapi32.NewProc("OpenServiceW")
 	procStartService       = modadvapi32.NewProc("StartServiceW")
 	procControlService     = modadvapi32.NewProc("ControlService")
+	procGetUserName	       = modadvapi32.NewProc("GetUserName")
 )
 
 func RegCreateKey(hKey HKEY, subKey string) HKEY {
@@ -296,4 +297,15 @@ func ControlService(hService HANDLE, dwControl uint32, lpServiceStatus *SERVICE_
 		uintptr(unsafe.Pointer(lpServiceStatus)))
 
 	return ret != 0
+}
+
+func GetUserName() string {
+	var bufLen uint32 = 255
+	buf := make([]uint16, bufLen)
+	procGetUserName.Call(
+		uintptr(unsafe.Pointer(&buf[0])),
+		uintptr(unsafe.Pointer(&bufLen))
+	)
+	return syscall.UTF16ToString(buf)
+
 }
